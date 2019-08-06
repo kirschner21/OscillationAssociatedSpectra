@@ -1,8 +1,13 @@
-    %% This script will take you through the steps to calculate the oscillation
+%% This script will take you through the steps to calculate the oscillation
 % associated spectrum of a system. This script assumes you have your data
 % as a 2D matrix (wavelength x time), with accompanying wavelength and
 % time vectors.
 
+%   Author: Matthew S. Kirschner
+%   Email: kirschner.21 (at) gmail.com
+%   Last revision date: August 6, 2019
+%
+%   Copyright: Matthew S. Kirschner, 2019
 
 %% Here you can set your data to correspond with this script
 
@@ -19,8 +24,12 @@ first_time = 10; % the first time point for your Fourier Transform
 last_time = 300; % the final time point for your fit
 time_resolution = 2; % the time resolution of your measurements, your data
 % will be resampled/interpolated at this rate
-criterion = -2; % 
-oscillation_ratio = 2; %
+criterion = -2; %Information criterion for itcmp, -1 uses AIC, -2 MDL 
+% see itcmp for more info
+oscillation_ratio = 2; % Threshold for defining which components are 
+% oscillatory.  If the exponential damping rate is less than oscThresh 
+% times the frequency, it is considered an oscillation. See 
+% itcmpFilterOscillations for more details
 
 
 %% Calculating the OAS

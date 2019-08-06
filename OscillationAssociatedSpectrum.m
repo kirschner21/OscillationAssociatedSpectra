@@ -2,6 +2,45 @@ function [Amplitude, Phase, w] = OscillationAssociatedSpectrum(data, ...
     wavelength, time, first_wavelength, last_wavelength, first_time,...
     last_time, time_resolution, periods, criterion, oscillation_ratio)
 %OscillationAssociatedSpectrum Calculates OAS of data
+% 
+% [Amplitude, Phase, w] = OscillationAssociatedSpectrum(data, ...
+%    wavelength, time, first_wavelength, last_wavelength, first_time,...
+%    last_time, time_resolution, periods, criterion, oscillation_ratio)
+%
+% INPUT
+%   data                2D-array (wavelength x time) of transient 
+%                       absorption (TA) data
+%   wavelength          1D-array corresponding to the wavelengths in 
+%                       the TA data
+%   time                1D-array corresponding to the times in the TA data 
+%   first_wavelength    First wavelength in the OAS
+%   last_wavelength     Final wavelength in the OAS
+%   first_time          First time to be used in the Fourier transform
+%   last_time           Final time to be used in the Fourier transform
+%   time_resolution     Time dependent data will be resampled/interpolated
+%                       at this rate
+%   periods             Oscillation periods to be considered
+%   crieterion          Information criterion for itcmp, -1 uses AIC, 
+%                       -2 MDL see itcmp for more info
+%   oscillation_ratio   Threshold for defining which components are 
+%                       oscillatory.  If the exponential damping rate is
+%                       less than oscThresh times the frequency, it is 
+%                       considered an oscillation. See 
+%                       itcmpFilterOscillations for more details
+%
+% OUTPUT
+%   Amplitude           2D-amplitude map of the OAS at every
+%                       wavelength/period
+%   Phase               2D-phase map of the OAS at every period
+%   w                   1D-array of wavelengths used in the OAS
+
+
+%   Author: Matthew S. Kirschner
+%   Email: kirschner.21 (at) gmail.com
+%   Last revision date: August 6, 2019
+%
+%   Copyright: Matthew S. Kirschner, 2019
+
 
 % find the wavelength/time range of interest
 wavelength_indices = sort(DetermineIndices(wavelength, first_wavelength,...
@@ -58,4 +97,3 @@ end
 w = wavelength(first_wavelength_index : last_wavelength_index);
 
 end
-
